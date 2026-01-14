@@ -1,0 +1,129 @@
+Documentație Proiect-Țibuleac Gabriela 
+Anul 2 Grupa E3
+	
+	Avem următoarea sintaxă dată pentru limbajul imperativ cu funcții, blocuri și declarații de variabile. 
+Începem cu expresii aritmetice AExp. 
+AExp conține numere întregi, variabile, operații. 
+	n: Int → AExp constructorul pentru constante întregi care permite transformarea unui numar intr-o expresie aritmetica
+
+\frac{ }{\left\langle n\left(i\right),\sigma\right\rangle\rightarrow_Ai}\emsp
+
+	x : String → AExp constructor pentru variabile, pe care le ia sub formă de șiruri de caractere
+\  			
+\frac{\ }{\left\langle x,\sigma\right\rangle\longrightarrow_A\sigma\left(x\right)}
+
+	adun: AExp → AExp → AExp constructor pentru adunare, primește două expresii aritmetice și produce o nouă expresie pentru suma lor
+
+\frac{\left\langle a_1,\sigma\right\rangle\rightarrow i_1\mathrm{\ \ } \left\langle a_2,\sigma\right\rangle\rightarrow i_2}{\left\langle a_1+a_2,\sigma\right\rangle\rightarrow\left(i_1+i_2\right)}
+
+	scad: AExp → AExp → AExp constructor pentru scădere
+
+\frac{\left\langle a_1,\sigma\right\rangle\rightarrow i_1\mathrm{\ \ } \left\langle a_2,\sigma\right\rangle\rightarrow i_2}{\left\langle a_1-a_2,\sigma\right\rangle\rightarrow\left(i_1-i_2\right)}
+
+	inmul : AExp → AExp → AExp constructor pentru înmulțire
+
+\frac{\left\langle a_1,\sigma\right\rangle\rightarrow i_1\mathrm{\ \ } \left\langle a_2,\sigma\right\rangle\rightarrow i_2}{\left\langle a_1\ast a_2,\sigma\right\rangle\rightarrow\left(i_1\ast i_2\right)}
+
+	div : AExp → AExp → AExp constructor pentru împărțire
+
+\frac{\left\langle a_1,\sigma\right\rangle\rightarrow i_1\mathrm{\ \ } \left\langle a_2,\sigma\right\rangle\rightarrow i_2\mathrm{\ \ } i_2\neq0}{\left\langle a_1/a_2,\sigma\right\rangle\rightarrow\left(i_1/i_2\right)}
+
+	mod : AExp → AExp → AExp constructor pentru modulo
+
+\frac{\left\langle a_1,\sigma\right\rangle\rightarrow i_1\mathrm{\ \ } \left\langle a_2,\sigma\right\rangle\rightarrow i_2\mathrm{\ \ } i_2\neq0}{\left\langle a_1%a_2,\sigma\right\rangle\rightarrow\left(i_1%i_2\right)}
+
+   Exemplu: x+5* (y-3) pentru a putea să scriem aceasta expresie o scriem : adun ( x “ x “) (inmul (n 5) (scad(x “y” )(n 3))).
+După voi folosi o instanță OfNat AExp pentru n care permite scrierea directă a numerelor naturale ca expresii aritmetice.
+  Exemplu: 5 in loc de n 5
+	Pentru operatori infixați asociativi la stânga cu prioritatea 65 pentru adunare și scădere iar o prioritate mai mare, 70, pentru înmulțire, împărțire și modulo.
+	BExp conține expresiile booleene: constante (true/false), comparații, operatori logici.
+	t : BExp constantă true
+
+\frac{\ }{\left\langle t r u e,\sigma\right\rangle\rightarrow t r u e}
+
+	f: BExp constantă false
+
+\frac{\ }{\langle\ false,\ \sigma\ \ket\ \rightarrow\ false}
+•	eq : AExp → AExp → BExp  egalitatea între două expresii aritmetice
+
+       		                                             	  \frac{\left\langle a_1,\sigma\right\rangle\rightarrow i_1\mathrm{\ } \left\langle a_2,\sigma\right\rangle\rightarrow i_2}{\left\langle a_1=a_2,\sigma\right\rangle\rightarrow\left(i_1=i_2\right)}
+
+	sm : AExp → AExp → BExp comparația mai mic <
+
+\frac{\left\langle a_1,\sigma\right\rangle\rightarrow i_1\mathrm{\ } \left\langle a_2,\sigma\right\rangle\rightarrow i_2}{\left\langle a_1<a_2,\sigma\right\rangle\rightarrow\left(i_1<i_2\right)}
+
+	seq : AExp → AExp → BExp comparația mai mic sau egal <=
+
+\frac{\left\langle a_1,\sigma\right\rangle\rightarrow i_1\mathrm{\ } \left\langle a_2,\sigma\right\rangle\rightarrow i_2}{\left\langle a_1\le a_2,\sigma\right\rangle\rightarrow\left(i_1\le i_2\right)}
+
+
+	neg : BExp → BExp negație logică a unei expresii booleene 
+
+\frac{\left\langle b,\sigma\right\rangle\rightarrow t r u e}{\langle\ !b,\ \sigma\ \ket\ \rightarrow\ false}
+
+\frac{\left\langle b,\sigma\right\rangle\rightarrow f a l s e}{\left\langle!b,\sigma\right\rangle\rightarrow t r u e}
+
+
+	and : BExp → BExp → BExp conjuncție logica AND
+
+\frac{\left\langle b_1,\sigma\right\rangle\rightarrow t r u e\mathrm{\ } \left\langle b_2,\sigma\right\rangle\rightarrow t r u e\mathrm{\ } }{\left\langle b_1\land b_2,\sigma\right\rangle\rightarrow t r u e}
+
+\frac{\left\langle b_1,\sigma\right\rangle\rightarrow f a l s e}{\left\langle b_1\land b_2,\sigma\right\rangle\rightarrow f a l s e}
+
+	or : BExp → BExp → BExp conjuncție logica OR
+
+\frac{\left\langle b_1,\sigma\right\rangle\rightarrow t r u e}{\left\langle b_1\vee b_2,\sigma\right\rangle\rightarrow t r u e}
+
+\frac{\left\langle b_1,\sigma\right\rangle\rightarrow f a l s e\mathrm{\ } \left\langle b_2,\sigma\right\rangle\rightarrow f a l s e}{\left\langle b_1\vee b_2,\sigma\right\rangle\rightarrow f a l s e}
+ 	Pentru operatori infixați asociativi la stânga cu prioritatea 40 pentru eq, sm, seq iar o prioritate mai mică, 30, pentru and și or și definim neg ca fiind prefixat deoarece se află în fața variabilelor.
+  Exemplu: BExp.sm (10 *' 2) (AExp.v "y") folosind BExp avem 10 *' 2 <' AExp.v "y"
+
+Com conține expresiile booleene: constante (true/false), comparații, operatori logici.
+	skip: Com comandă vidă
+
+\frac{\ }{\{\ skip,\ \sigma,\ \Gamma,\ s\ \}\ \Downarrow\{\ \sigma,\ \Gamma,\ s,\ none\ \}}
+
+	vardecl : String → AExp → Com declarație de variabilă cu inițializare, primește numele variabilei și expresia de inițializare 
+
+⟨ a,σ ⟩ → i{ var x∶= a,σ,Γ,s } ⇓ { σ[x ↦ i],Γ,s,none }
+
+	assing : String → AExp → Com atribuie unei valori variabilelor existente
+
+⟨ a,σ ⟩ → i{x≔a,σ,Γ,s}⇓{σx↦i,Γ,s,none}
+
+	seq: Com → Com→ Com execută comenzi în ordine
+
+\frac{\{c_1,\sigma,\Gamma,s\}\Downarrow\{\sigma^\prime,\Gamma^\prime,s^\prime,r_1\}\mathrm{\ } \{c_2,\sigma^\prime,\Gamma^\prime,s^\prime\}\Downarrow\{\sigma^{\prime\prime},\Gamma^{\prime\prime},s^{\prime\prime},r_2\}}{\{c_1;;c_2,\sigma,\Gamma,s\}\Downarrow\{\sigma^{\prime\prime},\Gamma^{\prime\prime},s^{\prime\prime},r_2\}}
+
+	ite : BExp → Com → Com→ Com instrucțiune if then else
+
+\frac{\left\langle b,\sigma\right\rangle\rightarrow t r u e\mathrm{\ } \{c_1,\sigma,\Gamma,s\}\Downarrow\{\sigma^\prime,\Gamma^\prime,s^\prime,r\}}{\{if\mathrm{\ }b\mathrm{\ }then\mathrm{\ }c_1\mathrm{\ } else\mathrm{\ } c_2,\sigma,\Gamma,s\}\Downarrow\{\sigma^\prime,\Gamma^\prime,s^\prime,r\}}
+
+\frac{\left\langle b,\sigma\right\rangle\rightarrow f a l s e\mathrm{\ } \{c_2,\sigma,\Gamma,s\}\Downarrow\{\sigma^\prime,\Gamma^\prime,s^\prime,r\}}{\{if\mathrm{\ }b\mathrm{\ }then\mathrm{\ }c_1\mathrm{\ } else\mathrm{\ } c_2,\sigma,\Gamma,s\}\Downarrow\{\sigma^\prime,\Gamma^\prime,s^\prime,r\}}
+
+
+	whilel : BExp → Com → Com bucla while
+
+\frac{b,\ \sigma\ \ket\ \rightarrow\ false}{\{while\mathrm{\ }b\mathrm{\ }do\mathrm{\ }c,\sigma,\Gamma,s\}\Downarrow\{\sigma,\Gamma,s,none\}}
+
+\frac{\left\langle b,\sigma\right\rangle\rightarrow t r u e\mathrm{\ } \{c,\sigma,\Gamma,s\}\Downarrow\{\sigma^\prime,\Gamma^\prime,s^\prime,r_1\}\mathrm{\ } \{while\mathrm{\ } b\mathrm{\ } do\mathrm{\ } c,\sigma^\prime,\Gamma^\prime,s^\prime\}\Downarrow\{\sigma^{\prime\prime},\Gamma^{\prime\prime},s^{\prime\prime},r_2\}}{\{while\mathrm{\ }b\mathrm{\ }do\mathrm{\ }c,\sigma,\Gamma,s\}\Downarrow\{\sigma^{\prime\prime},\Gamma^{\prime\prime},s^{\prime\prime},r_2\}}
+
+
+	forl : String → AExp → BExp → Com → Com bucla for
+
+⟨ a,σ ⟩ → i σ₁ = σ[x ↦ i] ⟨ b,σ₁ ⟩ → true { c,σ₁,Γ,s } ⇓ { σ₂,… } { for x:=a; b do c,σ₂,… } ⇓ { σ₃,… }{ for x∶= a; b do c,σ,Γ,s } ⇓ { σ₃,Γ'',s'',r }
+
+⟨ a,σ ⟩ → i σ₁ = σ[x ↦ i] ⟨ b,σ₁ ⟩ → false{ for x∶= a; b do c,σ,Γ,s } ⇓ { σ₁,Γ,s,none }
+
+	block : Com → Com bloc de cod care creează un domeniu de vizibilitate
+
+\frac{\{c,\sigma,\Gamma,s\}\Downarrow\{\sigma^\prime,\Gamma^\prime,s^\prime,r\}}{\{block\mathrm{\ }c,\sigma,\Gamma,s\}\Downarrow\{\sigma^\prime,\Gamma^\prime,s^\prime,r\}}
+
+	funf : String → List String → Com → Com declarația de funcție cu nume, listă de parametri și corp
+
+\frac{\ }{\{fun\mathrm{\ }f\left(p\right)\{b\},\sigma,\Gamma,s\}\Downarrow\{\sigma,\Gamma\left[f\mapsto\left(p,b\right)\right],s,none\}}
+
+	func : String → List AExp → Com  apelul funcției cu nume și listă de argumente
+
+\frac{\Gamma\left(f\right)=\left(p,b\right)\mathrm{\ } \left\langle a r g s,\sigma\right\rangle\rightarrow v a l s\mathrm{\ } \sigma_{loc}=bind\left(p,vals\right)\mathrm{\ } s_{new}=\sigma\Colon s\mathrm{\ } \{b,\sigma_{loc},\Gamma,s_{new}\}\Downarrow\{\sigma^\prime,\Gamma^\prime,\left(\sigma\Colon s\right),r\}}{\{f\left(args\right),\sigma,\Gamma,s\}\Downarrow\{\sigma,\Gamma^\prime,s,r\}}
+
